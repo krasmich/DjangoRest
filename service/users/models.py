@@ -13,6 +13,9 @@ class Accounts(models.Model):
     lastname = models.CharField(max_length=64)
     email = models.EmailField(unique=True)
 
+    def __str__(self):
+        return self.firstname + ' ' + self.lastname
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
