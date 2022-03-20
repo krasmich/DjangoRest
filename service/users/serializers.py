@@ -6,3 +6,9 @@ class AccountsModelSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Accounts
         fields = ['username', 'firstname', 'lastname', 'email']
+
+
+class SimpleAccountsModelSerializer(HyperlinkedModelSerializer):
+    class Meta:
+        model = Accounts
+        fields = ['username']
