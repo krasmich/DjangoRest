@@ -11,18 +11,8 @@ class ProjectModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class SimpleProjectModelSerializer(ModelSerializer):
-
-    class Meta:
-        model = Project
-        fields = ['name_project']
-
-
 class TodoModelSerializer(ModelSerializer):
-    creator = SimpleAccountsModelSerializer()
-    project = SimpleProjectModelSerializer()
 
     class Meta:
         model = Todo
-        # fields = '__all__'
-        exclude = ['id']
+        fields = '__all__'

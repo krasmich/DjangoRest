@@ -12,9 +12,14 @@ class Project(models.Model):
     def __str__(self):
         return self.name_project
 
+    class Meta:
+        db_table = 'project_list'
+        verbose_name = 'Проект'
+        verbose_name_plural = 'Проекты'
+
 
 class Todo(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='todo')
     text_note = models.TextField(blank=True, null=True)
     created_date = models.DateField(default=timezone.now, blank=True, null=True)
     updated_date = models.DateField(blank=True, null=True)
@@ -23,4 +28,12 @@ class Todo(models.Model):
         null=True,
         related_name="todo_created_by",
         on_delete=models.CASCADE)
-    status = models.BooleanField(default=False)
+    status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.text_note
+
+    class Meta:
+        db_table = 'todo_list'
+        verbose_name = 'Заметка'
+        verbose_name_plural = 'Заметки'
