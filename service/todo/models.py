@@ -1,13 +1,13 @@
 from django.db import models
 from django.utils import timezone
 
-from users.models import Accounts
+from users.models import User
 
 
 class Project(models.Model):
-    name_project = models.CharField(max_length=128)
-    link_repository = models.URLField(max_length=200)
-    users = models.ManyToManyField(Accounts)
+    name_project = models.CharField(verbose_name='Название', max_length=128, unique=True)
+    link_repository = models.URLField(verbose_name='Репо', max_length=200)
+    users = models.ManyToManyField(User, verbose_name='Юзеры')
 
     def __str__(self):
         return self.name_project
@@ -19,16 +19,15 @@ class Project(models.Model):
 
 
 class Todo(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='todo')
-    text_note = models.TextField(blank=True, null=True)
-    created_date = models.DateField(default=timezone.now, blank=True, null=True)
-    updated_date = models.DateField(blank=True, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Проект', related_name='todo')
+    text_note = models.TextField(verbose_name='Текст заметки', blank=True, null=True)
+    created_date = models.DateField(verbose_name='Создано', default=timezone.now, blank=True, null=True)
+    updated_date = models.DateField(verbose_name='Обновлено', blank=True, null=True)
     creator = models.ForeignKey(
-        Accounts,
-        null=True,
-        related_name="todo_created_by",
-        on_delete=models.CASCADE)
-    status = models.BooleanField(default=True)
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Автор')
+    status = models.BooleanField(verbose_name='Активно', default=True)
 
     def __str__(self):
         return self.text_note

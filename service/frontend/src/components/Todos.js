@@ -8,8 +8,9 @@ const TodoItem = ({todo}) => {
             <td>{todo.project}</td>
             <td>{todo.created_date}</td>
             <td>{todo.creator}</td>
-            <td>{todo.text_note}</td>
             <td>{todo.status}</td>
+            <td>{todo.text_note}</td>
+
         </tr>
     )
 }
@@ -22,8 +23,9 @@ const TodoList = ({todos}) => {
            <th>Project</th>
            <th>Created_date</th>
            <th>Creator</th>
-           <th>Text</th>
            <th>Status</th>
+           <th>Text</th>
+
            {todos.map((todo) => <TodoItem todo={todo} />)}
        </table>
    )

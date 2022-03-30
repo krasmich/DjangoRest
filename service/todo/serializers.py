@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField
-from users.serializers import SimpleAccountsModelSerializer
 from .models import Project, Todo
 
 

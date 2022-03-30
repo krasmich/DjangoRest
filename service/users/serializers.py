@@ -1,14 +1,8 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Accounts
+from .models import User
 
 
-class AccountsModelSerializer(ModelSerializer):
+class UserModelSerializer(ModelSerializer):
     class Meta:
-        model = Accounts
-        fields = ['username', 'firstname', 'lastname', 'email']
-
-
-class SimpleAccountsModelSerializer(ModelSerializer):
-    class Meta:
-        model = Accounts
-        fields = ['username']
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
