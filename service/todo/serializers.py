@@ -1,9 +1,10 @@
-from rest_framework.serializers import ModelSerializer, StringRelatedField
+from rest_framework.serializers import ModelSerializer
 from .models import Project, Todo
+from users.serializers import UserModelSerializer
 
 
 class ProjectModelSerializer(ModelSerializer):
-    users = StringRelatedField(many=True)
+    users = UserModelSerializer(many=True)
 
     class Meta:
         model = Project
@@ -14,4 +15,4 @@ class TodoModelSerializer(ModelSerializer):
 
     class Meta:
         model = Todo
-        fields = '__all__'
+        exclude = ('status',)
