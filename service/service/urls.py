@@ -19,6 +19,21 @@ from rest_framework.routers import DefaultRouter
 from users.views import UserModelViewSet
 from todo.views import ProjectModelViewSet, TodoModelViewSet
 from rest_framework.authtoken import views
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title='TODOApi',
+        default_version='1.0',
+        description='docs for...',
+        contact=openapi.Contact(email='admin@ex.local'),
+        license=openapi.License(name='KSK'),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 router = DefaultRouter()
 router.register('users', UserModelViewSet)
@@ -30,4 +45,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
+    path('swagger/', schema_view.with_ui('swagger')),
+    path('redoc/', schema_view.with_ui('redoc')),
 ]
