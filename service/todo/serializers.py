@@ -10,8 +10,16 @@ class ProjectModelSerializer(ModelSerializer):
         model = Project
         fields = '__all__'
 
+class TodoModelSerializerBase(ModelSerializer):
+
+    class Meta:
+        model = Todo
+        exclude = ('status',)
+
 
 class TodoModelSerializer(ModelSerializer):
+    project = ProjectModelSerializer
+    author = UserModelSerializer
 
     class Meta:
         model = Todo
